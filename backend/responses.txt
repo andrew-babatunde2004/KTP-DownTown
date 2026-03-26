@@ -1,5 +1,25 @@
-@everyone {name} is planning an event at {destination} on {date} at {time}. {respondUrl}
-@everyone Heads up: {name} has an event planned for {destination} on {date} at {time}. RSVP here: {respondUrl}
-@everyone Event update: {name} is meeting at {destination} on {date} at {time}. Let us know here: {respondUrl}
-@everyone {name} scheduled something at {destination} for {date} at {time}. Respond at {respondUrl}
-@everyone Reminder: {name}'s event is happening at {destination} on {date} at {time}. Please reply here: {respondUrl}
+@everyone {name} is pushing dt at {destination} on {date} at {time}. RESPOND OR YOU DONT WANT IT ENOUGH {respondUrl}
+@everyone {name} just declared a night out at {destination} on {date} at {time}. attendance is not optional btw {respondUrl}
+@everyone breaking news: {name} is going out at {destination} on {date} at {time}. be there or hear about it later {respondUrl}
+@everyone {name} is stepping out to {destination} on {date} at {time}. don’t be the one that missed it {respondUrl}
+@everyone {name} is assembling the squad at {destination} on {date} at {time}. roll call starts now {respondUrl}
+@everyone {name} has decided vibes will occur at {destination} on {date} at {time}. confirm your existence {respondUrl}
+@everyone {name} is going out at {destination} on {date} at {time}. if you see this and don’t respond that’s crazy {respondUrl}
+@everyone alert: {name} is outside at {destination} on {date} at {time}. decisions must be made immediately {respondUrl}
+@everyone {name} is making moves at {destination} on {date} at {time}. are you in or are you boring {respondUrl}
+@everyone {name} is going out at {destination} on {date} at {time}. respond so we know who’s real {respondUrl}
+@everyone {name} is calling a function at {destination} on {date} at {time}. return true if you’re coming {respondUrl}
+@everyone {name} initialized a night out at {destination} on {date} at {time}. input your attendance {respondUrl}
+@everyone {name} is spawning at {destination} on {date} at {time}. join the lobby now {respondUrl}
+@everyone {name} is loading into {destination} on {date} at {time}. queue up or get left behind {respondUrl}
+@everyone {name} is about to be at {destination} on {date} at {time}. don’t overthink it just go {respondUrl}
+@everyone {name} is going out at {destination} on {date} at {time}. say yes and figure it out later {respondUrl}
+@everyone {name} is planning chaos at {destination} on {date} at {time}. act accordingly {respondUrl}
+@everyone {name} is outside at {destination} on {date} at {time}. this is your sign {respondUrl}
+@everyone {name} is heading to {destination} on {date} at {time}. missing this will be discussed {respondUrl}
+@everyone {name} is making tonight happen at {destination} on {date} at {time}. don’t fumble {respondUrl}
+@everyone {name} is going out at {destination} on {date} at {time}. attendance builds character {respondUrl}
+@everyone {name} is hosting vibes at {destination} on {date} at {time}. be a part of history {respondUrl}
+@everyone {name} is pulling up to {destination} on {date} at {time}. you should probably do the same {respondUrl}
+@everyone {name} is outside at {destination} on {date} at {time}. respectfully get there {respondUrl}
+@everyone {name} is making a questionable decision at {destination} on {date} at {time}. join them {respondUrl}
