@@ -1,0 +1,5 @@
+@everyone {name} is planning an event at {destination} on {date} at {time}. {respondUrl}
+@everyone Heads up: {name} has an event planned for {destination} on {date} at {time}. RSVP here: {respondUrl}
+@everyone Event update: {name} is meeting at {destination} on {date} at {time}. Let us know here: {respondUrl}
+@everyone {name} scheduled something at {destination} for {date} at {time}. Respond at {respondUrl}
+@everyone Reminder: {name}'s event is happening at {destination} on {date} at {time}. Please reply here: {respondUrl}

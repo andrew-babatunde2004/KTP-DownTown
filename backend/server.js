@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 const { randomUUID } = require("crypto");
+const fs = require("fs");
+const path = require("path");
 const cors = require("cors");
 const express = require("express");
 const { sendMessage , sendRSVPMessage } = require("./bot");
@@ -16,6 +18,32 @@ const allowedOrigins = [
 
 let latestAlert = null;
 const alertResponses = new Map();
+const responseTemplatePath = path.join(__dirname, "responses.txt");
+const defaultAlertTemplate =
+  "@everyone {name} is planning an event at {destination} on {date} at {time}. {respondUrl}";
+
+function formatTemplate(template, values) {
+  return template.replace(/\{(\w+)\}/g, (_match, key) => values[key] ?? "");
+}
+
+function getAlertMessageTemplate() {
+  try {
+    const fileContent = fs.readFileSync(responseTemplatePath, "utf8");
+    const templates = fileContent
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    if (templates.length > 0) {
+      const randomIndex = Math.floor(Math.random() * templates.length);
+      return templates[randomIndex];
+    }
+  } catch (error) {
+    console.warn("Could not read responses.txt, using default alert template.", error.message);
+  }
+
+  return defaultAlertTemplate;
+}
 
 app.use(
   cors({
@@ -56,7 +84,13 @@ app.post("/api/alert", async (req, res) => {
   latestAlert = alert;
   alertResponses.set(alert.id, []);
 
-  const message = `@everyone ${alert.name} is planning an event at ${alert.destination} on ${alert.date} at ${alert.time}. http://localhost:5173/#/respond`;
+  const message = formatTemplate(getAlertMessageTemplate(), {
+    name: alert.name,
+    destination: alert.destination,
+    date: alert.date,
+    time: alert.time,
+    respondUrl: "http://localhost:5173/#/respond",
+  });
 
   try {
     await sendMessage(message);
