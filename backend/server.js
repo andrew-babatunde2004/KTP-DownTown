@@ -3,12 +3,12 @@ require("dotenv").config();
 const { randomUUID } = require("crypto");
 const cors = require("cors");
 const express = require("express");
-// sending a message requires the ./bot api orrr? 
-const { sendMessage } = require("./bot");
+const { sendMessage , sendRSVPMessage } = require("./bot");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const host = process.env.HOST || (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
+const host =
+  process.env.HOST || (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
 const allowedOrigins = [
   process.env.FRONTEND_ORIGIN,
   process.env.FRONTEND_PREVIEW_ORIGIN,
@@ -56,7 +56,7 @@ app.post("/api/alert", async (req, res) => {
   latestAlert = alert;
   alertResponses.set(alert.id, []);
 
-  const message = `${alert.name} is planning an event at ${alert.destination} on ${alert.date} at ${alert.time}.`;
+  const message = `@everyone ${alert.name} is planning an event at ${alert.destination} on ${alert.date} at ${alert.time}. http://localhost:5173/#/respond`;
 
   try {
     await sendMessage(message);
@@ -65,8 +65,9 @@ app.post("/api/alert", async (req, res) => {
       alert,
     });
   } catch (error) {
+    console.error("Failed to send alert to Discord:", error);
     return res.status(500).json({
-      message: "Error sending alert to Discord!!.",
+      message: "Error sending alert to Discord.",
       error: error.message,
     });
   }
@@ -122,15 +123,16 @@ app.post("/api/alerts/respond", async (req, res) => {
   responses.push(responseEntry);
   alertResponses.set(alertId, responses);
 
-  const discordMessage = `/tts @everyone ${responseEntry.name} responded ${responseEntry.response.toUpperCase()} for ${latestAlert.name}'s event at ${latestAlert.destination} on ${latestAlert.date} at ${latestAlert.time}.`;
-
+ 
+ const discordMessage = `${responseEntry.name} responded ${responseEntry.response.toUpperCase()} for ${latestAlert.name}'s event at ${latestAlert.destination} on ${latestAlert.date} at ${latestAlert.time}.`;
   try {
-    await sendMessage(discordMessage);
+    await sendRSVPMessage(discordMessage);
     return res.json({
       message: `Response recorded: ${normalizedResponse}`,
       response: responseEntry,
     });
   } catch (error) {
+    console.error("Failed to send response to Discord:", error);
     return res.status(500).json({
       message: "Error sending response to Discord.",
       error: error.message,
@@ -141,16 +143,32 @@ app.post("/api/alerts/respond", async (req, res) => {
 let server = null;
 
 function startServer() {
-  server = app.listen(port, host, () => {
-    console.log(`Server running on http://${host}:${port}`);
+  if (server) {
+    return server;
+  }
+
+  server = app.listen({ port, host });
+
+  server.once("listening", () => {
+    const address = server.address();
+
+    if (!address || typeof address === "string") {
+      console.log(`Server running on port ${port}`);
+      return;
+    }
+
+    console.log(`Server running on http://${address.address}:${address.port}`);
   });
 
-  server.on("error", (error) => {
-    console.error("Server failed to stay up:", error);
+  server.once("error", (error) => {
+    console.error("Server failed to start:", error);
+    server = null;
+    process.exitCode = 1;
   });
 
   server.on("close", () => {
     console.log("Server closed.");
+    server = null;
   });
 
   return server;

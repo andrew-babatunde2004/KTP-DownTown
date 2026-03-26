@@ -59,7 +59,9 @@ export default function RespondAlert() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to send response.");
+        throw new Error(
+          data.error ? `${data.message || "Failed to send response."} (${data.error})` : data.message || "Failed to send response."
+        );
       }
 
       setStatusMessage(data.message || `Response recorded: ${answer}`);

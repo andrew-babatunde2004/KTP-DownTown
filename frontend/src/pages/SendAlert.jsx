@@ -52,7 +52,9 @@ export default function SendAlert() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to send alert.");
+        throw new Error(
+          data.error ? `${data.message || "Failed to send alert."} (${data.error})` : data.message || "Failed to send alert."
+        );
       }
 
       setStatusMessage(data.message || "Alert sent successfully.");
