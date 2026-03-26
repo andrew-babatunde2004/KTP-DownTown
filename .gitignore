@@ -1,1 +1,9 @@
-/Users/andrew/KTPDOWNTOWN/KTP-DownTown/.env
+node_modules/
+frontend/node_modules/
+
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+!.env.example
+!frontend/.env.example
