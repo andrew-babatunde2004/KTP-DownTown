@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { apiUrl } from "../api";
+import pic from "../assets/pic.jpg";
+
 
 export default function SendAlert() {
   const [formData, setFormData] = useState({
@@ -52,9 +54,7 @@ export default function SendAlert() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.error ? `${data.message || "Failed to send alert."} (${data.error})` : data.message || "Failed to send alert."
-        );
+        throw new Error(data.message || "Failed to send alert.");
       }
 
       setStatusMessage(data.message || "Alert sent successfully.");
@@ -79,9 +79,9 @@ export default function SendAlert() {
   return (
     <div className="app">
       <div className="card">
-        <h1 className="title">Group Alert System</h1>
+        <h1 className="title">Downtown Alert System</h1>
         <p className="subtitle">
-          Enter the trip details, then press the red button to notify the group.
+          Summon KTP to go downtown, then press the red button to notify everybody.
         </p>
 
         {!isReady && (
@@ -98,13 +98,13 @@ export default function SendAlert() {
             </label>
 
             <label>
-              Where are you going?
+              What Bar?
               <input
                 type="text"
                 name="destination"
                 value={formData.destination}
                 onChange={handleChange}
-                placeholder="Enter destination"
+                placeholder="Enter Bar"
               />
             </label>
 
@@ -138,7 +138,7 @@ export default function SendAlert() {
           <div className="alert-section">
             <div className="summary-box">
               <p><strong>Name:</strong> {formData.name}</p>
-              <p><strong>Destination:</strong> {formData.destination}</p>
+              <p><strong>Bar:</strong> {formData.destination}</p>
               <p><strong>Date:</strong> {formData.date}</p>
               <p><strong>Time:</strong> {formData.time}</p>
             </div>
@@ -147,8 +147,13 @@ export default function SendAlert() {
               className="red-button"
               onClick={handleEmergencySend}
               disabled={isSending}
+              style={{
+                backgroundImage: `url(${pic})`,  
+              }}
             >
-              {isSending ? "SENDING..." : "SEND ALERT"}
+              <span className="button-text">
+                {isSending ? "SENDING..." : "SEND FIEND ALERT"}
+              </span>
             </button>
 
             <button className="back-button" onClick={handleReset}>

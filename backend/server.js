@@ -56,7 +56,7 @@ app.post("/api/alert", async (req, res) => {
   latestAlert = alert;
   alertResponses.set(alert.id, []);
 
-  const message = `@everyone ${alert.name} is planning an event at ${alert.destination} on ${alert.date} at ${alert.time}. http://localhost:5173/#/respond`;
+  const message = `@everyone ${alert.name} is planning an event at ${alert.destination} on ${alert.date} at ${alert.time}. RESPOND HERE: http://localhost:5173/#/respond`;
 
   try {
     await sendMessage(message);
