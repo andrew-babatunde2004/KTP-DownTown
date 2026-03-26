@@ -1,9 +1,10 @@
 const configuredApiBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").trim();
+
 const isLocalHost =
   typeof window !== "undefined" &&
   ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
-const fallbackApiBaseUrl = isLocalHost ? "http://localhost:3000" : "";
+const fallbackApiBaseUrl = isLocalHost ? "http://localhost:3000" : "https://api.jmistry.com";
 const apiBaseUrl = (configuredApiBaseUrl || fallbackApiBaseUrl).replace(/\/$/, "");
 
 export function apiUrl(path) {

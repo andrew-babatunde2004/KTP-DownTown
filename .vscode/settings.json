@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7a381924-f789-4ca2-b079-de9b443b9f00/resourceGroups/KTP-DOWNTOWN_group/providers/Microsoft.Web/sites/KTP-DOWNTOWN",
+    "appService.deploySubpath": "."
+}
