@@ -4,7 +4,7 @@ const isLocalHost =
   typeof window !== "undefined" &&
   ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
-const fallbackApiBaseUrl = isLocalHost ? "http://localhost:3000" : "https://api.jmistry.com";
+const fallbackApiBaseUrl = isLocalHost ? "http://localhost:3000" : "https://api.jmistry.com/api";
 const apiBaseUrl = (configuredApiBaseUrl || fallbackApiBaseUrl).replace(/\/$/, "");
 
 export function apiUrl(path) {
